@@ -15,7 +15,7 @@ jobs:
         run: pip3 install -r requirements.txt
       - name: Build
         run: |
-          jupyter nbconvert --execute Covid.ipynb
+          jupyter nbconvert --execute --to html Covid.ipynb
           mkdir public
           mv *.html public
       - name: Deploy
