@@ -18,10 +18,9 @@ jobs:
           && pip3 install -r requirements.txt
       - name: Build
         run: >
-          jupyter kernelspec list
-          && jupyter nbconvert --ExecutePreprocessor.kernel_name=python3 --execute --to html Covid.ipynb
+          jupyter nbconvert --ExecutePreprocessor.kernel_name=python3 --execute --to html Covid.ipynb
           && mkdir public
-          && mv *.html public
+          && mv Covid.html public/index.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
