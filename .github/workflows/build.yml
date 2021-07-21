@@ -11,15 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: > 
+          apt-get update
+          && apt-get install -y python3-pip
+          && pip3 install -r requirements.txt
       - name: Build
-        run: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip3 install -r requirements.txt
-          jupyter nbconvert --execute --to html Covid.ipynb
-          mkdir public
-          mv *.html public
+        run: >
+          jupyter kernelspec list
+          && jupyter nbconvert --ExecutePreprocessor.kernel_name=python3 --execute --to html Covid.ipynb
+          && mkdir public
+          && mv *.html public
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
