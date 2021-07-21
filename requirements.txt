@@ -3,3 +3,4 @@ jupyter_contrib_nbextensions
 pandas
 matplotlib
 requests
+pygments>=2.4.1
